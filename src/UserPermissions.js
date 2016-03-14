@@ -24,6 +24,7 @@ class UserPermissions {
   }
 
   isProjectAdmin (projectId) {
+    if(this.isApplicationAdmin()) return true
     return this.hasProject(projectId) && this.getProjectPermission(projectId, 'administer-project') != null
   }
 
@@ -35,6 +36,12 @@ class UserPermissions {
   getProjectDefaultFeeds (projectId) {
     if (!this.hasProject(projectId)) return null
     return this.projectLookup[projectId].defaultFeeds || []
+  }
+
+  hasProjectPermission (projectId, permissionType) {
+    if(this.isProjectAdmin(projectId)) return true
+    let p = this.getProjectPermission(projectId, permissionType)
+    return (this.getProjectPermission(projectId, permissionType) !== null)
   }
 
   getProjectPermission (projectId, permissionType) {
