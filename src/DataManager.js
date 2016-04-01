@@ -6,15 +6,15 @@ export default class DataManager {
   }
 
   getProjectsAndFeeds (user) {
-    var getFeedColls = fetch(this.props.managerUrl + '/api/feedcollections', {
+    var getProjects = fetch(this.props.managerUrl + '/api/manager/secure/project', {
       headers: { 'Authorization': 'Bearer ' + user.token }
     }).then((res) => { return res.json() })
 
-    var getFeedSources = fetch(this.props.managerUrl + '/api/feedsources', {
+    var getFeedSources = fetch(this.props.managerUrl + '/api/manager/secure/feedsource', {
       headers: { 'Authorization': 'Bearer ' + user.token }
     }).then((res) => { return res.json() })
 
-    return Promise.all([getFeedColls, getFeedSources]).then((results) => {
+    return Promise.all([getProjects, getFeedSources]).then((results) => {
       let projects = results[0]
       var projectLookup = {}
       for (var project of projects) {
