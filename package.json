@@ -32,5 +32,8 @@
   },
   "peerDependencies": {
     "isomorphic-fetch": "^2.2.1"
+  },
+  "dependencies": {
+    "babel-core": "^6.7.4"
   }
 }
