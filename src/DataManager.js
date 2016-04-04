@@ -24,7 +24,7 @@ export default class DataManager {
 
       // populate project-level feed arrays
       for (var feed of results[1]) {
-        projectLookup[feed.feedCollection.id].feeds.push(feed)
+        projectLookup[feed.projectId].feeds.push(feed)
       }
 
       return projects
