@@ -43,12 +43,24 @@ export default class DatatoolsNavbar extends Component {
           <NavItem href={this.props.managerUrl} active={this.props.managerUrl === '#'}>
             Manager
           </NavItem>
-          <NavItem href={this.props.editorUrl} active={this.props.editorUrl === '#'}>
-            Editor
-          </NavItem>
-          <NavItem href={this.props.userAdminUrl} active={this.props.userAdminUrl === '#'}>
-            Users
-          </NavItem>
+          {this.props.editorUrl
+            ? <NavItem href={this.props.editorUrl} active={this.props.editorUrl === '#'}>
+                Editor
+              </NavItem>
+            : null
+          }
+          {this.props.alertsUrl
+            ? <NavItem href={this.props.alertsUrl} active={this.props.alertsUrl === '#'}>
+                Alerts
+              </NavItem>
+            : null
+          }
+          {this.props.userAdminUrl
+            ? <NavItem href={this.props.userAdminUrl} active={this.props.userAdminUrl === '#'}>
+                Users
+              </NavItem>
+            : null
+          }
         </Nav>
         <Nav pullRight>
           <NavItem href='#'><Glyphicon glyph='question-sign' /> Guide</NavItem>
