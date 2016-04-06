@@ -24,7 +24,9 @@ export default class DataManager {
 
       // populate project-level feed arrays
       for (var feed of results[1]) {
-        projectLookup[feed.projectId].feeds.push(feed)
+        if (typeof projectLookup[feed.projectId] !== 'undefined') {
+          projectLookup[feed.projectId].feeds.push(feed)
+        }
       }
 
       return projects
