@@ -24,7 +24,7 @@ class UserPermissions {
   }
 
   isProjectAdmin (projectId) {
-    if(this.isApplicationAdmin()) return true
+    if (this.isApplicationAdmin()) return true
     return this.hasProject(projectId) && this.getProjectPermission(projectId, 'administer-project') != null
   }
 
@@ -39,9 +39,9 @@ class UserPermissions {
   }
 
   hasProjectPermission (projectId, permissionType) {
-    if(this.isProjectAdmin(projectId)) return true
+    if (this.isProjectAdmin(projectId)) return true
     let p = this.getProjectPermission(projectId, permissionType)
-    return (this.getProjectPermission(projectId, permissionType) !== null)
+    return (p !== null)
   }
 
   getProjectPermission (projectId, permissionType) {
@@ -49,6 +49,24 @@ class UserPermissions {
     var projectPermissions = this.getProjectPermissions(projectId)
     for (var permission of projectPermissions) {
       if (permission.type === permissionType) return permission
+    }
+    return null
+  }
+
+  hasFeed (listOfFeeds, feedId) {
+    if (listOfFeeds.indexOf('*') > -1) return true
+    else if (listOfFeeds.indexOf(feedId) > -1) return true
+    return null
+  }
+
+  hasFeedPermission (projectId, feedId, permissionType) {
+    if (this.isProjectAdmin(projectId)) return true
+    let p = this.getProjectPermission(projectId, permissionType)
+    if (p !== null) {
+      let defaultFeeds = this.getProjectDefaultFeeds(projectId)
+      let permissionFeeds = p.feeds || []
+      if (this.hasFeed(defaultFeeds, feedId)) return true
+      if (this.hasFeed(permissionFeeds, feedId)) return true
     }
     return null
   }

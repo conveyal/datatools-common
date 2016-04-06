@@ -1,6 +1,6 @@
 {
   "name": "datatools-common",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Common components for the Conveyal GTFS Data Tools suite",
   "main": "build/index.js",
   "babel": {
